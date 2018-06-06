@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>講座管理メニュー</title>
 </head>
 <body>
-
+	<header>
+		<h1>講座管理メニュー</h1>
+		<h3>「講座登録」または、「講座修正削除」ボタンを押してください。</h3>
+	</header>
+	<section>
+		<form action="/mkCalendar" method="get">
+		<button type="submit" name="btn" value="/input">講座登録</button>
+		<button type="submit" name="btn" value="/search">講座修正削除</button>
+		</form>
+	</section>
 </body>
 </html>
