@@ -20,6 +20,11 @@ public class MenuController {
 	public String menuPage() {
 		return "main";
 	}
+
+	@RequestMapping({"/login"})
+	public String loginPage() {
+		return "login";
+	}
 	
 	@RequestMapping("/mkCalendar")
 	public String mkCal(@Param("btn") String btn) {

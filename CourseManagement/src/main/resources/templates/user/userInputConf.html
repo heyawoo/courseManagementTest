@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<title>申込み確認</title>
+</head>
+<body>
+<div class="container-fluid">
+	<header class="row justify-content-center">
+		<h1>申込み確認</h1>
+		<h4>※ 入力内容を確認してください。</h4>
+	</header>
+	<section class="row justify-content-center">
+		<form th:action="@{/uinput-end}" th:object="${apply}" method="post">
+		<table border="1">
+			<tr>
+				<th>名前</th>
+				<td>
+					<span th:text="${apply.name}"></span>
+					<input type="hidden" th:field="*{name}" th:value="${apply.name}">
+				</td>
+			</tr>
+			<tr>
+				<th>フリガナ</th>
+				<td>
+					<span th:text="${apply.furigana}"></span>
+					<input type="hidden" th:field="*{furigana}" th:value="${apply.furigana}">
+				</td>
+			</tr>
+			<tr>
+				<th>Eメールアドレス</th>
+				<td>
+					<span th:text="${apply.mail}"></span>
+					<input type="hidden" th:field="*{mail}" th:value="${apply.mail}">
+				</td>
+			</tr>
+			<tr>
+				<th>性別</th>
+				<td>
+					<input type="radio" th:if="${apply.sex}!=2" th:text="女" disabled="disabled">
+					<input type="radio" th:value="2" th:if="${apply.sex}==2" checked="checked" th:text="女" disabled="disabled" th:field="*{sex}">
+					<input type="radio" th:if="${apply.sex}!=1" th:text="男" disabled="disabled">
+					<input type="radio" th:value="1" th:if="${apply.sex}==1" checked="checked" th:text="男" disabled="disabled" th:field="*{sex}">
+					<input type="hidden" th:field="*{sex}" th:value="${apply.sex}">
+				</td>
+			</tr>
+			<tr>
+				<th>生年月日</th>
+				<td>
+					<span th:text="${apply.year}"></span>年
+					<input type="hidden" th:field="*{year}" th:value="${apply.year}">
+					<span th:text="${apply.month}"></span>月
+					<input type="hidden" th:field="*{month}" th:value="${apply.month}">
+					<span th:text="${apply.day}"></span>日
+					<input type="hidden" th:field="*{day}" th:value="${apply.day}">
+				</td>
+			</tr>
+			<tr>
+				<th>電話番号</th>
+				<td>
+					<span th:text="${apply.tel}"></span>
+					<input type="hidden" th:field="*{tel}">
+				</td>
+			</tr>
+			<tr>
+				<th>希望講座</th>
+				<td>
+					<table>
+						<tr>
+							<th>開催日時</th>
+							<th>講座名</th>
+							<th>空席状況</th>
+							<th>チェック</th>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<th>備考欄</th>
+				<td>
+					<textarea th:field="*{remarks}" rows="5" cols="10"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button type="submit" class="btn btn-primary">確認</button>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</section>
+</div>
+</body>
+</html>
