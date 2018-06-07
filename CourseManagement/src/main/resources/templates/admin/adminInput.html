@@ -6,14 +6,15 @@
 <title>講座登録</title>
 </head>
 <body>
-	<header>
+<div class="container-fluid">
+	<header class="row justify-content-center">
 		<h1>講座登録</h1>
-		<h3>※ は入力必須です。</h3>
+		<h4>※ は入力必須です。</h4>
 	</header>
-	<section>
-		<div id="errbox" th:if="${#fields.hasErrors('${icf.*}')}">
-      		<p th:errors="${icf.*}" class="error-message">error！</p>
-		</div>
+	<div id="errbox" th:if="${#fields.hasErrors('${icf.*}')}" class="row justify-content-center">
+     		<p th:errors="${icf.*}" class="error-message">error！</p>
+	</div>
+	<section class="row justify-content-center">
 		<form th:action="@{/input-conf}" th:object="${icf}" method="post">
 		<table border="1">
 			<tr>
@@ -79,12 +80,13 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button type="submit" formaction="/main">戻る</button>
-					<button type="submit">確認</button>
+					<button type="submit" formaction="/main" class="btn btn-primary">戻る</button>
+					<button type="submit" class="btn btn-primary">確認</button>
 				</td>
 			</tr>
 		</table>
 		</form>
 	</section>
+</div>
 </body>
 </html>

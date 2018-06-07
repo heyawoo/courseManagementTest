@@ -22,7 +22,7 @@ public class AdminService {
 		Boolean result = false;
 		CourseInfo check = mapper.nocheck(courseNo);
 		
-		if (check.getCourseNo() != null) {
+		if (check != null && check.getCourseNo() != null) {
 			result = true;
 		}
 		

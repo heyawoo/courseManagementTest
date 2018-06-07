@@ -6,13 +6,14 @@
 <title>講座確認</title>
 </head>
 <body>
-	<header>
+<div class="container-fluid">
+	<header class="row justify-content-center">
 		<h1>講座確認</h1>
 		<h3>※ 入力内容を確認してください。</h3>
 		<div id="errbox">
 		</div>
 	</header>
-	<section>
+	<section class="row justify-content-center">
 		<form th:action="@{/input-end}" th:object="${icf}" method="post">
 		<table border="1">
 			<tr>
@@ -67,12 +68,13 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button type="submit" formaction="/input" >戻る</button>
-					<button type="submit">確認</button>
+					<button type="submit" formaction="/input" class="btn btn-primary">戻る</button>
+					<button type="submit" class="btn btn-primary">確認</button>
 				</td>
 			</tr>
 		</table>
 		</form>
 	</section>
+</div>
 </body>
 </html>
