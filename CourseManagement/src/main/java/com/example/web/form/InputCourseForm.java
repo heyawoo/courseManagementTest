@@ -1,8 +1,15 @@
 package com.example.web.form;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Range;
+
 public class InputCourseForm {
 
+	@NotEmpty
 	private String courseNo;
+	@NotEmpty
 	private String courseName;
 	private String year;
 	private String month;
@@ -11,6 +18,9 @@ public class InputCourseForm {
 	private String startminute;
 	private String endhour;
 	private String endminute;
+	@NotEmpty
+	@Digits(fraction = 0, integer = 11, message="{error.admin.input.capacity.parse}")
+	@Range(min=1, max=50, message="{error.admin.input.capacity.range}")
 	private String capacity;
 	
 	public InputCourseForm() {
