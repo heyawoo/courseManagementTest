@@ -1,15 +1,21 @@
 package com.example.web.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.CourseInfo;
-import com.example.servise.AdminService;
+import com.example.service.AdminService;
 import com.example.web.form.InputCourseForm;
 
 @Controller
@@ -20,23 +26,19 @@ public class InputController {
 	
 	@ModelAttribute("icf")
 	public InputCourseForm setForm() {
+		System.out.println("[input]");
 		return new InputCourseForm();
 	}
 	
 	@RequestMapping("/input")
 	public String inputPage(InputCourseForm form) {
-		System.out.println("go input : "+form.toString());
 		return "admin/adminInput";
 	}
 
 	@RequestMapping("/input-conf")
-	public String inputConf(@ModelAttribute("icf") InputCourseForm form, BindingResult result) {
+	public String inputConf(@Validated @ModelAttribute("icf") InputCourseForm form, BindingResult result) {
 		
-		System.out.println("input form conf : "+form.toString());
-		
-		if (form.getCourseName() == null) {
-			result.reject("error.admin.input.aa");
-		}
+		result = validate(form, result);
 		
 		if (result.hasErrors()) {
 			return "admin/adminInput";
@@ -59,7 +61,57 @@ public class InputController {
 		info.setEndTime(endtime);
 		System.out.println("insert domain setting : "+info.toString());
 		
+		service.inputCourse(info);
+		
 		return "admin/adminInputEnd";
+	}
+	
+	
+	public BindingResult validate(InputCourseForm form, BindingResult result) {
+		String startTime = "";
+		String endTime = "";
+		
+		// no check
+		if (!form.getCourseNo().isEmpty()) {
+			if (service.noCheck(form.getCourseNo())) {
+				result.reject("error.admin.input.no.exist");
+			}
+		}
+		
+		// the date
+		if (form.getYear().isEmpty()||form.getMonth().isEmpty()||form.getDay().isEmpty()) {
+			result.reject("error.admin.input.thedate.required");
+		}
+		
+		// start time
+		if (form.getStarthour().isEmpty()||form.getStartminute().isEmpty()) {
+			result.reject("error.admin.input.starttime.required");
+		} else {
+			startTime = form.getStarthour()+":"+form.getStartminute();
+		}
+		
+		// end time
+		if (form.getEndhour().isEmpty()||form.getEndminute().isEmpty()) {
+			result.reject("error.admin.input.endtime.required");
+		} else {
+			endTime = form.getEndhour()+":"+form.getEndminute();
+		}
+		
+		// time compare
+		if (!startTime.isEmpty()&&!endTime.isEmpty()) {
+			SimpleDateFormat simple = new SimpleDateFormat("hh:mm");
+			try {
+				Date start = simple.parse(startTime);
+				Date end = simple.parse(endTime);
+				if (start.compareTo(end) >= 0) {
+					result.reject("error.admin.input.time.irony");
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
 	}
 	
 

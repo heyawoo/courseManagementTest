@@ -6,9 +6,12 @@
 <mapper namespace="com.example.persistence.CourseInfoMapper">
 
 	<insert id="insert">
-		INSERT INTO course(coure_no, course_name, the_date, start_time, end_time, capacity) 
-		VALUES(#{courseNo}, #{courseName}, #{theDate}, #{startTime}, #{endTime}, #{capacity})
+		INSERT INTO course(course_no, course_name, the_date, start_time, end_time, capacity, inp_date) 
+		VALUES(#{courseNo}, #{courseName}, #{theDate}, #{startTime}, #{endTime}, #{capacity}, CURRENT_DATE())
 	</insert>
     
+    <select id="nocheck" resultType="com.example.domain.CourseInfo">
+    	SELECT * FROM course WHERE course_no = #{courseNo}
+    </select>
 
 </mapper>

@@ -14,6 +14,6 @@ public interface CourseInfoMapper {
 	
 	public List<CourseInfo> search();
 	
-	public CourseInfo idcheck(@Param("courseNo") String courseNo);
+	public CourseInfo nocheck(@Param("courseNo") String courseNo);
 	
 }

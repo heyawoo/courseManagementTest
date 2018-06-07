@@ -7,9 +7,9 @@ import org.hibernate.validator.constraints.Range;
 
 public class InputCourseForm {
 
-	@NotEmpty
+	@NotEmpty(message="{error.admin.input.no.required}")
 	private String courseNo;
-	@NotEmpty
+	@NotEmpty(message="{error.admin.input.name.required}")
 	private String courseName;
 	private String year;
 	private String month;
@@ -18,7 +18,7 @@ public class InputCourseForm {
 	private String startminute;
 	private String endhour;
 	private String endminute;
-	@NotEmpty
+	@NotEmpty(message="{error.admin.input.capacity.required}")
 	@Digits(fraction = 0, integer = 11, message="{error.admin.input.capacity.parse}")
 	@Range(min=1, max=50, message="{error.admin.input.capacity.range}")
 	private String capacity;

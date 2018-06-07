@@ -1,4 +1,4 @@
-package com.example.servise;
+package com.example.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +16,16 @@ public class AdminService {
 	@Transactional
 	public void inputCourse(CourseInfo info) {
 		mapper.insert(info);
+	}
+	
+	public Boolean noCheck(String courseNo) {
+		Boolean result = false;
+		CourseInfo check = mapper.nocheck(courseNo);
+		
+		if (check.getCourseNo() != null) {
+			result = true;
+		}
+		
+		return result;
 	}
 }
