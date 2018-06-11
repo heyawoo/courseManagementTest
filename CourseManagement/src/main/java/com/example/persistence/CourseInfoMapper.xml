@@ -13,5 +13,63 @@
     <select id="nocheck" resultType="com.example.domain.CourseInfo">
     	SELECT * FROM course WHERE course_no = #{courseNo}
     </select>
+    
+    <resultMap type="com.example.domain.CourseInfo" id="cList">
+    	<result property="courseNo" column="course_no"/>
+    	<result property="courseName" column="course_name"/>
+    	<result property="theDate" column="the_date"/>
+    	<result property="startTime" column="start_time"/>
+    	<result property="endTime" column="end_time"/>
+    	<result property="capacity" column="capacity"/>
+    </resultMap>
+    
+    <select id="getList" resultMap="cList" parameterType="com.example.web.form.SearchCourseForm">
+    	<bind name="namelike" value="'%' + courseName + '%'"/>
+    	SELECT * FROM course
+    	<where>
+    		<if test="courseNo != ''">
+    			course_no = #{courseNo}
+    		</if>
+    		<if test="courseName != ''">
+    			AND course_name LIKE #{namelike}
+    		</if>
+    		<if test="year != ''">
+    			AND YEAR(the_date) = #{year}
+    		</if>
+    		<if test="month != ''">
+    			AND MONTH(the_date) = #{month}
+    		</if>
+    		<if test="day != ''">
+    			AND DAY(the_date) = #{day}
+    		</if>
+    		<if test="startHour != ''">
+    			AND HOUR(start_time) = #{startHour}
+    		</if>
+    		<if test="startMinute != ''">
+    			AND MINUTE(start_time) = #{startMinute}
+    		</if>
+    		<if test="endHour != ''">
+    			AND HOUR(end_time) = #{endHour}
+    		</if>
+    		<if test="endMinute != ''">
+    			AND MINUTE(end_time) = #{endMinute}
+    		</if>
+    		<if test="capacity != ''">
+    			AND capacity = #{capacity}
+    		</if>
+    		<if test="status != ''">
+    			<if test="status == 'complete'">
+    				<![CDATA[ AND the_date < CURDATE() ]]>
+    			</if>
+    			<if test="status == 'complete'">
+    				<![CDATA[ AND the_date = CURDATE() ]]>
+    			</if>
+    			<if test="status == 'complete'">
+    				<![CDATA[ AND the_date > CURDATE() ]]>
+    			</if>
+    		</if>
+    	</where>
+    	ORDER BY course_no ASC, course_name ASC, the_date ASC
+    </select>
 
 </mapper>

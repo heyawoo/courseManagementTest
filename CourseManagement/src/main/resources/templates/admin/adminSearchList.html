@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<title>講座一覧</title>
+</head>
+<body>
+<div class="container-fluid">
+	<header class="row justify-content-center">
+		<h1>講座一覧</h1>
+	</header>
+	<section>
+		<table>
+			<tr>
+				<th>講座番号</th>
+				<th>講座名</th>
+				<th>開催日時</th>
+				<th>定員</th>
+				<th>状態</th>
+				<th></th>
+			</tr>
+			<tr th:each="c : ${list}">
+				<td>
+					<span th:text="${c.courseNo}"></span>
+				</td>
+				<td>
+					<span th:text="${c.courseName}"></span>
+				</td>
+				<td>
+					<span th:text="${c.theDate}+' '+${c.weekday}+' '+${c.startTime}+'-'+${c.endTime}"></span>
+				</td>
+				<td>
+					<span th:text="${c.capacity}"></span>
+				</td>
+				<td>
+					<span th:text="${c.status}"></span>
+				</td>
+				<td>
+					<form action="/delete-conf" method="post" th:object="${sform}">
+						<input type="hidden" th:field="*{courseNo}" th:value="${c.courseNo}">
+						<input type="hidden" th:field="*{courseName}" th:value="${c.courseName}">
+						<input type="hidden" th:field="*{theDate}" th:value="${c.theDate}">
+						<input type="hidden" th:field="*{startTime}" th:value="${c.startTime}">
+						<input type="hidden" th:field="*{endTime}" th:value="${c.endTime}">
+						<button type="submit" class="btn btn-dange">削除</button>
+						<button type="submit" formaction="/modify" class="btn btn-success">修正</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+		<button type="button" class="btn btn-primary">講座検索</button>
+	</section>
+</div>
+</body>
+</html>

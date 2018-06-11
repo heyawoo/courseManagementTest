@@ -1,11 +1,14 @@
 package com.example.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.CourseInfo;
 import com.example.persistence.CourseInfoMapper;
+import com.example.web.form.SearchCourseForm;
 
 @Service
 public class AdminService {
@@ -27,5 +30,12 @@ public class AdminService {
 		}
 		
 		return result;
+	}
+	
+	@Transactional
+	public List<CourseInfo> getList(SearchCourseForm sform){
+		List<CourseInfo> list = mapper.getList(sform);
+		
+		return list;
 	}
 }

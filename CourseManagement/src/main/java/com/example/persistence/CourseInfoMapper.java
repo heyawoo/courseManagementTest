@@ -3,6 +3,7 @@ package com.example.persistence;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import com.example.domain.CourseInfo;
+import com.example.web.form.SearchCourseForm;
 
 public interface CourseInfoMapper {
 	
@@ -15,5 +16,7 @@ public interface CourseInfoMapper {
 	public List<CourseInfo> search();
 	
 	public CourseInfo nocheck(@Param("courseNo") String courseNo);
+	
+	public List<CourseInfo> getList(SearchCourseForm sform);
 	
 }
