@@ -2,16 +2,25 @@ package com.example.web.form;
 
 import java.util.Arrays;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class InputApplyForm {
 
+	@NotEmpty(message= "{error.user.input.name.required}")
 	private String name;
+	@NotEmpty(message="{error.user.input.furigana.required}")
 	private String furigana;
+	@NotEmpty(message="{error.user.input.mail.required}")
+	@Email(message="{error.user.input.mail.form}")
 	private String mail;
 	private String sex;
 	private String year;
 	private String month;
 	private String day;
 	private String tel;
+	@NotEmpty(message="{error.user.input.applied.required}")
 	private String[] applied;
 	private String remarks;
 	

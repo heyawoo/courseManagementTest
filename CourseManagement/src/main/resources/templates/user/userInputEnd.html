@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<title>登録完了</title>
 </head>
 <body>
-
+<div class="container-fluid">
+	<header class="row justify-content-center">
+		<h1>申込み完了</h1>
+		<h4>
+		講座申込みの受付を完了しました。<br>ありがとうございます。
+		</h4>
+	</header>
+	<section class="row justify-content-center">
+		<button type="button" onclick="location.href='/uinput'" class="btn btn-primary">追加申込み</button>
+	</section>
+</div>
 </body>
 </html>

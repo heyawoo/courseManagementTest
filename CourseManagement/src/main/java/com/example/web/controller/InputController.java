@@ -26,7 +26,6 @@ public class InputController {
 	
 	@ModelAttribute("icf")
 	public InputCourseForm setForm() {
-		System.out.println("[input]");
 		return new InputCourseForm();
 	}
 	
@@ -38,35 +37,39 @@ public class InputController {
 	@RequestMapping("/input-conf")
 	public String inputConf(@Validated @ModelAttribute("icf") InputCourseForm form, BindingResult result) {
 		
+		// validation self check
 		result = validate(form, result);
 		
+		// errorがある場合
 		if (result.hasErrors()) {
 			return "admin/adminInput";
 		}
 		
+		// errorがない場合
 		return "admin/adminInputConf";
 	}
 	
 	@RequestMapping("/input-end")
 	public String inputeEnd(InputCourseForm form) {
+		// 新しいdomain object 生成
 		CourseInfo info = new CourseInfo();
-		
+		// 値setting
 		String thedate = form.getYear()+form.getMonth()+form.getDay();
 		String starttime = form.getStarthour()+":"+form.getStartminute();
 		String endtime = form.getEndhour()+":"+form.getEndminute();
-		
+		//　field　copy
 		BeanUtils.copyProperties(form, info);
 		info.setTheDate(thedate);
 		info.setStartTime(starttime);
 		info.setEndTime(endtime);
-		System.out.println("insert domain setting : "+info.toString());
 		
+		// DB 登録
 		service.inputCourse(info);
 		
 		return "admin/adminInputEnd";
 	}
 	
-	
+	// self validation method
 	public BindingResult validate(InputCourseForm form, BindingResult result) {
 		String startTime = "";
 		String endTime = "";

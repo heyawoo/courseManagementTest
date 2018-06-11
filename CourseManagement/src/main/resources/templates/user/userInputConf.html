@@ -73,13 +73,24 @@
 							<th>空席状況</th>
 							<th>チェック</th>
 						</tr>
+						<tr th:if="${session.registList}" th:each="c : ${session.registList}" >
+							<td th:text="${c.thedate}+${c.weekday}+${c.start}+'-'+${c.end}"></td>
+							<td th:text="${c.name}"></td>
+							<td th:text="${c.extra}"></td>
+							<td>
+								<input type="checkbox" th:checked="${#lists.contains(apply.applied, c.no)}"  disabled="disabled"/>
+							</td>
+							<!-- th:checked="${#lists.contains(apply.applied, c.no)}"  -->
+						</tr>
 					</table>
+					<input type="hidden" th:field="*{applied}" th:value="${apply.applied}" >
 				</td>
 			</tr>
 			<tr>
 				<th>備考欄</th>
 				<td>
-					<textarea th:field="*{remarks}" rows="5" cols="10"></textarea>
+					<pre><span th:text="${apply.remarks}"></span></pre>
+					<input type="hidden" th:field="*{remarks}" th:value="${apply.remarks}">
 				</td>
 			</tr>
 			<tr>

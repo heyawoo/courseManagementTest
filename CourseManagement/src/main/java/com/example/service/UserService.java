@@ -10,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.domain.Application;
+import com.example.domain.CourseApply;
 import com.example.domain.CourseInfo;
 import com.example.domain.RegistCourseInfo;
 import com.example.persistence.ApplyMapper;
+import com.example.web.form.InputApplyForm;
+import com.example.web.form.InputCourseForm;
 
 @Service
 public class UserService {
@@ -41,15 +45,22 @@ public class UserService {
 				}else {
 					c.setExtra("残"+c.getExtra()+"席");
 				}
-				
-				System.out.println("get List : "+c.toString());
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
-		
 		return list;
+	}
+	
+	@Transactional
+	public void insertApplication(Application application) {
+		mapper.insertApplication(application);
+	}
+	
+	@Transactional
+	public void insertCourseApply(CourseApply courseApply) {
+		mapper.insertCourseApply(courseApply);
 	}
 	
 }

@@ -47,7 +47,7 @@
 				<td>
 					<select th:field="*{year}" th:value="${apply.year}">
 						<option value=""></option>
-						<option th:each="y : ${session.yearlist}" th:value="${y}" th:text="${y}"></option>
+						<option th:each="y : ${session.ageyearlist}" th:value="${y}" th:text="${y}"></option>
 					</select>年
 					<select th:field="*{month}" th:value="${apply.month}">
 						<option value=""></option>
@@ -75,11 +75,11 @@
 							<th>空席状況</th>
 							<th>チェック</th>
 						</tr>
-						<tr th:if="${registList}" th:each="c : ${registList}">
+						<tr th:if="${session.registList}" th:each="c : ${session.registList}">
 							<td th:text="${c.thedate}+${c.weekday}+${c.start}+'-'+${c.end}"></td>
 							<td th:text="${c.name}"></td>
 							<td th:text="${c.extra}"></td>
-							<td><input type="checkbox" th:field="*{applied}" th:value="${c.no}" /></td>
+							<td><input type="checkbox" th:field="*{applied}" th:value="${c.no}" th:if="${!#strings.equals(c.extra, '満席')}"/></td>
 						</tr>
 					</table>
 				</td>
@@ -87,7 +87,7 @@
 			<tr>
 				<th>備考欄</th>
 				<td>
-					<textarea th:field="*{remarks}" rows="5" cols="10" th:value="${apply.remarks}"></textarea>
+					<textarea th:field="*{remarks}" rows="5" cols="70" th:value="${apply.remarks}"></textarea>
 				</td>
 			</tr>
 			<tr>

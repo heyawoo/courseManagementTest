@@ -31,6 +31,7 @@ public class MenuController {
 		
 		Calendar cal = Calendar.getInstance();
 		ArrayList<String> year = new ArrayList<>();
+		ArrayList<String> ageyear = new ArrayList<>();
 		ArrayList<String> month = new ArrayList<>();
 		ArrayList<String> day = new ArrayList<>();
 		ArrayList<String> hour = new ArrayList<>();
@@ -38,6 +39,10 @@ public class MenuController {
 		
 		for (int i = cal.get(Calendar.YEAR); i < cal.get(Calendar.YEAR)+5; i++) {
 			year.add(i+"");
+		}
+		
+		for (int i = cal.get(Calendar.YEAR); i > cal.get(Calendar.YEAR)-90; i--) {
+			ageyear.add(i+"");
 		}
 
 		for (int i = 1; i <= 12; i++) {
@@ -69,6 +74,7 @@ public class MenuController {
 		}
 		
 		session.setAttribute("yearlist", year);
+		session.setAttribute("ageyearlist", ageyear);
 		session.setAttribute("monthlist", month);
 		session.setAttribute("daylist", day);
 		session.setAttribute("hourlist", hour);

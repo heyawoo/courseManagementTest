@@ -26,4 +26,29 @@
 		LIMIT 5;
 	</select>
 	
+	
+	<insert id="insertApplication">
+		INSERT INTO application(id, name, furigana, mail, sex, birthday, tel, remarks, inp_date) 
+		VALUES(0, #{name}, #{furigana}, #{mail}, #{sex}, #{birthday}, #{tel}, #{remarks}, CURRENT_DATE())
+		<if test="birthday"></if>
+	</insert>
+	
+	<insert id="insertCourseApply" parameterType="com.example.domain.CourseApply">
+		<selectKey keyProperty="idApplication" resultType="String" order="BEFORE">
+			SELECT a1.id 
+			FROM application a1 
+			WHERE a1.inp_date = (SELECT a2.inp_date 
+								FROM application a2 
+								WHERE a2.name = a1.name 
+								ORDER BY a2.id DESC 
+								LIMIT 1) 
+			ORDER BY a1.id DESC 
+			LIMIT 1;
+		</selectKey>
+		INSERT INTO course_apply(id, id_application, course_no, inp_date) VALUES 
+		<foreach collection="courseNo" item="num" index="index" separator=",">
+       		(0, #{idApplication}, #{num}, CURRENT_DATE())
+    	</foreach>
+	</insert>
+	
 </mapper>

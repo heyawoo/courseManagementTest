@@ -3,7 +3,9 @@ package com.example.persistence;
 import java.util.List;
 
 import com.example.domain.Application;
+import com.example.domain.CourseApply;
 import com.example.domain.RegistCourseInfo;
+import com.example.web.form.InputApplyForm;
 
 public interface ApplyMapper {
 
@@ -11,7 +13,6 @@ public interface ApplyMapper {
 	
 	public void insertApplication(Application application);
 	
-	public void insertApplyInfo(Application application);
-	
+	public void insertCourseApply(CourseApply courseApply);
 	
 }
