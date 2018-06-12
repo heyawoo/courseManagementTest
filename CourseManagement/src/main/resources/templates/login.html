@@ -6,7 +6,32 @@
 <title>ログイン</title>
 </head>
 <body>
-
-<button type="button" onclick="location.href='/mkCalendar?btn=/uinput'" class="btn btn-primary">user</button>
+<div class="container-fluid">
+	<header class="row justify-content-center">
+		<div class="row">
+			<h1>ログイン</h1>
+		</div>
+	</header>
+	<div id="errbox" th:if="${#fields.hasErrors('${userForm.*}')}" class="row justify-content-center">
+    		<p th:errors="${userForm.*}" class="error-message">error！</p>
+	</div>
+	<section class="row justify-content-center">
+		<form th:action="@{/login-check}" method="post" th:object="${userForm}">
+		<div class="row">
+			<span>ユーザID</span>
+			<input type="text" th:field="*{userId}">
+		</div>
+		<div class="row">
+			<span>パスワード</span>
+			<input type="password" th:field="*{passwd}">
+		</div>
+		<button type="submit" class="btn btn-primary">login</button>
+		</form>
+	</section>
+	<section>
+		<h4>初めての方はユーザ登録をしてください。</h4>
+		<button type="button" onclick="location.href='/signup'" class="btn btn-primary">ユーザ登録</button>
+	</section>
+</div>
 </body>
 </html>

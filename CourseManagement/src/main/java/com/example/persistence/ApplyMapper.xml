@@ -51,4 +51,19 @@
     	</foreach>
 	</insert>
 	
+	
+	<select id="loginCheck" resultType="com.example.domain.UserInfo" parameterType="com.example.web.form.UserForm">
+		SELECT * FROM course_user WHERE user_id = #{userId} AND passwd = #{passwd}
+	</select>
+	
+	<select id="idCheck" resultType="String">
+		SELECT user_id FROM course_user WHERE user_id = #{userId}
+	</select>
+	
+	<insert id="insertUser">
+		INSERT INTO course_user(id, user_id, passwd, authority, inp_date) 
+		SELECT MAX(id)+1, #{userId}, #{passwd}, 1, CURRENT_DATE() FROM course_user
+	</insert>
+	
+	
 </mapper>
