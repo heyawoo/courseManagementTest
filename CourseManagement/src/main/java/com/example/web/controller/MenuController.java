@@ -100,7 +100,7 @@ public class MenuController {
 	}
 	
 	@RequestMapping("/mkCalendar")
-	public String mkCal() {
+	public String mkCal(@Param("btn") String btn) {
 		
 		Calendar cal = Calendar.getInstance();
 		ArrayList<String> year = new ArrayList<>();
@@ -156,9 +156,11 @@ public class MenuController {
 		UserInfo user = (UserInfo) session.getAttribute("user");
 		
 		if (user.getAuthority().equals("0")) {
+			if (btn != null && !btn.equals("")) {
+				return "redirect:"+btn;
+			}
 			return "/main";
-		}
-		
+		} 
 		return "redirect:/uinput";
 	}
 	
