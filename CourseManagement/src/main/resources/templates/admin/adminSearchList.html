@@ -11,15 +11,17 @@
 		<h1>講座一覧</h1>
 	</header>
 	<section>
-		<table>
-			<tr>
-				<th>講座番号</th>
-				<th>講座名</th>
-				<th>開催日時</th>
-				<th>定員</th>
-				<th>状態</th>
-				<th></th>
-			</tr>
+		<table class="table">
+			<thead class="thead-light">
+				<tr scope="row">
+					<th scope="col">講座番号</th>
+					<th scope="col">講座名</th>
+					<th scope="col">開催日時</th>
+					<th scope="col">定員</th>
+					<th scope="col">状態</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
 			<tr th:each="c : ${list}">
 				<td>
 					<span th:text="${c.courseNo}"></span>
@@ -37,19 +39,20 @@
 					<span th:text="${c.status}"></span>
 				</td>
 				<td>
-					<form action="/delete-conf" method="post" th:object="${sform}">
-						<input type="hidden" th:field="*{courseNo}" th:value="${c.courseNo}">
-						<input type="hidden" th:field="*{courseName}" th:value="${c.courseName}">
-						<input type="hidden" th:field="*{theDate}" th:value="${c.theDate}">
-						<input type="hidden" th:field="*{startTime}" th:value="${c.startTime}">
-						<input type="hidden" th:field="*{endTime}" th:value="${c.endTime}">
-						<button type="submit" class="btn btn-dange">削除</button>
+					<form action="/delete-conf" method="post">
+						<input type="hidden" name="courseNo" th:value="${c.courseNo}">
+						<input type="hidden" name="courseName" th:value="${c.courseName}">
+						<input type="hidden" name="theDate" th:value="${c.theDate}">
+						<input type="hidden" name="startTime" th:value="${c.startTime}">
+						<input type="hidden" name="endTime" th:value="${c.endTime}">
+						<input type="hidden" name="capacity" th:value="${c.capacity}">
+						<button type="submit" class="btn btn-danger">削除</button>
 						<button type="submit" formaction="/modify" class="btn btn-success">修正</button>
 					</form>
 				</td>
 			</tr>
 		</table>
-		<button type="button" class="btn btn-primary">講座検索</button>
+		<button type="button" onclick="location.href='/search'" class="btn btn-primary">講座検索</button>
 	</section>
 </div>
 </body>

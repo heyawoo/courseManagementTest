@@ -5,6 +5,7 @@ public class CourseSearch {
 	private String courseNo;
 	private String courseName;
 	private String theDate;
+	private String weekday;
 	private String startTime;
 	private String endTime;
 	private String capacity;
@@ -13,12 +14,13 @@ public class CourseSearch {
 	public CourseSearch() {
 	}
 
-	public CourseSearch(String courseNo, String courseName, String theDate, String startTime, String endTime,
-			String capacity, String status) {
+	public CourseSearch(String courseNo, String courseName, String theDate, String weekday, String startTime,
+			String endTime, String capacity, String status) {
 		super();
 		this.courseNo = courseNo;
 		this.courseName = courseName;
 		this.theDate = theDate;
+		this.weekday = weekday;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.capacity = capacity;
@@ -47,6 +49,14 @@ public class CourseSearch {
 
 	public void setTheDate(String theDate) {
 		this.theDate = theDate;
+	}
+
+	public String getWeekday() {
+		return weekday;
+	}
+
+	public void setWeekday(String weekday) {
+		this.weekday = weekday;
 	}
 
 	public String getStartTime() {
@@ -84,10 +94,8 @@ public class CourseSearch {
 	@Override
 	public String toString() {
 		return "CourseSearch [courseNo=" + courseNo + ", courseName=" + courseName + ", theDate=" + theDate
-				+ ", startTime=" + startTime + ", endTime=" + endTime + ", capacity=" + capacity + ", status=" + status
-				+ "]";
+				+ ", weekday=" + weekday + ", startTime=" + startTime + ", endTime=" + endTime + ", capacity="
+				+ capacity + ", status=" + status + "]";
 	}
-	
-	
 	
 }

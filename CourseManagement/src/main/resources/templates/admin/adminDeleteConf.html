@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<title>講座確認</title>
 </head>
 <body>
-
+<div class="container-fluid">
+	<header class="row justify-content-center">
+		<h1>削除確認</h1>
+		<h3>削除する講座情報を確認してください。</h3>
+	</header>
+	<section class="row justify-content-center">
+		<form th:action="@{/delete-end}" th:object="${cinfo}" method="post">
+		<table class="table">
+			<tr>
+				<th>講座番号</th>
+				<td>
+					<span th:text="${cinfo.courseNo}"></span>
+					<input type="hidden" value="${cinfo.courseNo}" th:field="*{courseNo}">
+				</td>
+			</tr>
+			<tr>
+				<th>講座名</th>
+				<td>
+					<span th:text="${cinfo.courseName}"></span>
+					<input type="hidden" value="${cinfo.courseNo}" th:field="*{courseName}">
+				</td>
+			</tr>
+			<tr>
+				<th>講座開催日</th>
+				<td>
+					<span th:text="${cinfo.theDate}"></span>
+					<input type="hidden" value="${cinfo.theDate}" th:field="*{theDate}">
+				</td>
+			</tr>
+			<tr>
+				<th>開始時刻</th>
+				<td>
+					<span th:text="${cinfo.startTime}"></span>
+					<input type="hidden" value="${cinfo.startTime}" th:field="*{startTime}">
+				</td>
+			</tr>
+			<tr>
+				<th>終了時刻</th>
+				<td>
+					<span th:text="${cinfo.endTime}"></span>
+					<input type="hidden" value="${cinfo.endTime}" th:field="*{endTime}">
+				</td>
+			</tr>
+			<tr>
+				<th>定員</th>
+				<td>
+					<span th:text="${cinfo.capacity}"></span>
+					<input type="hidden" value="${cinfo.capacity}" th:field="*{capacity}">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button type="submit" name="btn" value="listbtn" formaction="/search-list" class="btn btn-primary">戻る</button>
+					<button type="submit" class="btn btn-primary">削除</button>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</section>
+</div>
 </body>
 </html>

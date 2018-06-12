@@ -61,15 +61,23 @@
     			<if test="status == 'complete'">
     				<![CDATA[ AND the_date < CURDATE() ]]>
     			</if>
-    			<if test="status == 'complete'">
+    			<if test="status == 'ongoing'">
     				<![CDATA[ AND the_date = CURDATE() ]]>
     			</if>
-    			<if test="status == 'complete'">
+    			<if test="status == 'ready'">
     				<![CDATA[ AND the_date > CURDATE() ]]>
     			</if>
     		</if>
     	</where>
     	ORDER BY course_no ASC, course_name ASC, the_date ASC
     </select>
+    
+    <delete id="deleteApply">
+		DELETE FROM course_apply WHERE course_no = #{courseNo}
+    </delete>
+    
+    <delete id="deleteCourse">
+    	DELETE FROM course WHERE course_no = #{courseNo}
+    </delete>
 
 </mapper>

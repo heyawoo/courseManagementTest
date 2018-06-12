@@ -9,7 +9,9 @@ public interface CourseInfoMapper {
 	
 	public void insert(CourseInfo info);
 	
-	public void delete(String no);
+	public void deleteApply(String courseNo);
+	
+	public void deleteCourse(String courseNo);
 	
 	public void update(CourseInfo info);
 	
