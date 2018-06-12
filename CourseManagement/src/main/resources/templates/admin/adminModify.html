@@ -1,10 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<title>講座修正</title>
 </head>
 <body>
-
+<div class="container-fluid">
+	<header class="row justify-content-center">
+		<h1>講座修正</h1>
+	</header>
+	<div id="errbox" th:if="${#fields.hasErrors('${icf.*}')}" class="row justify-content-center">
+     		<p th:errors="${icf.*}" class="error-message">error！</p>
+	</div>
+	<section class="row justify-content-center">
+		<form th:action="@{/modify-conf}" th:object="${icf}" method="post">
+		<table class="table">
+			<tr>
+				<th>講座番号</th>
+				<td>
+					<span th:text="${icf.courseNo}"></span>
+					<input type="hidden" th:field="*{courseNo}" th:value="${icf.courseNo}">
+				</td>
+			</tr>
+			<tr>
+				<th>講座名</th>
+				<td>
+					<input type="text" maxlength="40" th:field="*{courseName}" th:value="${icf.courseName}">
+				</td>
+			</tr>
+			<tr>
+				<th>講座開催日</th>
+				<td>
+					<select th:field="*{year}" th:value="${icf.year}">
+						<option value=""></option>
+						<option th:each="y : ${session.yearlist}" th:value="${y}" th:text="${y}"></option>
+					</select>年
+					<select th:field="*{month}" th:value="${icf.month}">
+						<option value=""></option>
+						<option th:each="m : ${session.monthlist}" th:value="${m}" th:text="${m}"></option>
+					</select>月
+					<select th:field="*{day}" th:value="${icf.day}">
+						<option value=""></option>
+						<option th:each="d : ${session.daylist}" th:value="${d}" th:text="${d}"></option>
+					</select>日
+				</td>
+			</tr>
+			<tr>
+				<th>開始時刻</th>
+				<td>
+					<select th:field="*{starthour}" th:value="${icf.starthour}">
+						<option value=""></option>
+						<option th:each="sh : ${session.hourlist}" th:value="${sh}" th:text="${sh}"></option>
+					</select>時
+					<select th:field="*{startminute}" th:value="${icf.startminute}">
+						<option value=""></option>
+						<option th:each="sm : ${session.minutelist}" th:value="${sm}" th:text="${sm}"></option>
+					</select>分
+				</td>
+			</tr>
+			<tr>
+				<th>終了時刻</th>
+				<td>
+					<select th:field="*{endhour}" th:value="${icf.endhour}">
+						<option value=""></option>
+						<option th:each="eh : ${session.hourlist}" th:value="${eh}" th:text="${eh}"></option>
+					</select>時
+					<select th:field="*{endminute}" th:value="${icf.endminute}">
+						<option value=""></option>
+						<option th:each="em : ${session.minutelist}" th:value="${em}" th:text="${em}"></option>
+					</select>分
+				</td>
+			</tr>
+			<tr>
+				<th>定員</th>
+				<td>
+					<input type="text" th:field="*{capacity}" th:value="${icf.capacity}">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button type="submit" name="btn" value="listbtn" formaction="/search-list" class="btn btn-primary">戻る</button>
+					<button type="submit" class="btn btn-primary">確認</button>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</section>
+</div>
 </body>
 </html>

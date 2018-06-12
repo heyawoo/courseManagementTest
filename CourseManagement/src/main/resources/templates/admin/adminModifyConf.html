@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<title>修正確認</title>
 </head>
 <body>
-
+<div class="container-fluid">
+	<header class="row justify-content-center">
+		<h1>修正確認</h1>
+		<h3>講座情報の修正内容を確認してください。</h3>
+		<div id="errbox">
+		</div>
+	</header>
+	<section class="row justify-content-center">
+		<form th:action="@{/modify-end}" th:object="${icf}" method="post">
+		<table class="table">
+			<tr>
+				<th>講座番号</th>
+				<td>
+					<span th:text="${icf.courseNo}"></span>
+					<input type="hidden" value="${icf.courseNo}" th:field="*{courseNo}">
+				</td>
+			</tr>
+			<tr>
+				<th>講座名</th>
+				<td>
+					<span th:text="${icf.courseName}"></span>
+					<input type="hidden" value="${icf.courseNo}" th:field="*{courseName}">
+				</td>
+			</tr>
+			<tr>
+				<th>講座開催日</th>
+				<td>
+					<span th:text="${icf.year}"></span>
+					<input type="hidden" value="${icf.year}" th:field="*{year}">年
+					<span th:text="${icf.month}"></span>
+					<input type="hidden" value="${icf.month}" th:field="*{month}">月
+					<span th:text="${icf.day}"></span>
+					<input type="hidden" value="${icf.day}" th:field="*{day}">日
+				</td>
+			</tr>
+			<tr>
+				<th>開始時刻</th>
+				<td>
+					<span th:text="${icf.starthour}"></span>
+					<input type="hidden" value="${icf.starthour}" th:field="*{starthour}">時
+					<span th:text="${icf.startminute}"></span>
+					<input type="hidden" value="${icf.startminute}" th:field="*{startminute}">分
+				</td>
+			</tr>
+			<tr>
+				<th>終了時刻</th>
+				<td>
+					<span th:text="${icf.endhour}"></span>
+					<input type="hidden" value="${icf.endhour}" th:field="*{endhour}">時
+					<span th:text="${icf.endminute}"></span>
+					<input type="hidden" value="${icf.endminute}" th:field="*{endminute}">分
+				</td>
+			</tr>
+			<tr>
+				<th>定員</th>
+				<td>
+					<span th:text="${icf.capacity}"></span>
+					<input type="hidden" value="${icf.capacity}" th:field="*{capacity}">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button type="submit" formaction="/modify" class="btn btn-primary">戻る</button>
+					<button type="submit" class="btn btn-primary">確認</button>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</section>
+</div>
 </body>
 </html>

@@ -82,4 +82,9 @@ public class AdminService {
 		mapper.deleteApply(courseInfo.getCourseNo());
 		mapper.deleteCourse(courseInfo.getCourseNo());
 	}
+	
+	@Transactional
+	public void updateCourse(CourseInfo courseInfo) {
+		mapper.update(courseInfo);
+	}
 }

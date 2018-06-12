@@ -79,5 +79,15 @@
     <delete id="deleteCourse">
     	DELETE FROM course WHERE course_no = #{courseNo}
     </delete>
+    
+    <update id="update" parameterType="com.example.domain.CourseInfo">
+    	UPDATE course 
+    	SET course_name = #{courseName}, 
+    	the_date = #{theDate}, 
+    	start_time=#{startTime}, 
+    	end_time=#{endTime}, 
+    	capacity = #{capacity}
+    	WHERE course_no = #{courseNo}
+    </update>
 
 </mapper>

@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<title>削除完了</title>
 </head>
 <body>
-
+<div class="container-fluid">
+	<header class="row justify-content-center">
+		<h1>修正完了</h1>
+		<h3>修正を完了しました。</h3>
+	</header>
+	<section class="row justify-content-center">
+		<button type="button" class="btn btn-primary" onclick="location.href='/main'" >講座管理メニュー</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/search'" >講座検索</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/search-list'" >講座一覧</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/logout'" >ログアウト</button>
+	</section>
+</div>
 </body>
 </html>

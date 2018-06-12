@@ -102,7 +102,7 @@ public class InputController {
 		
 		// time compare
 		if (!startTime.isEmpty()&&!endTime.isEmpty()) {
-			SimpleDateFormat simple = new SimpleDateFormat("hh:mm");
+			SimpleDateFormat simple = new SimpleDateFormat("HH:mm");
 			try {
 				Date start = simple.parse(startTime);
 				Date end = simple.parse(endTime);
