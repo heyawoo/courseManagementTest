@@ -26,7 +26,6 @@ public class UserService {
 	@Autowired
 	ApplyMapper mapper;
 	
-	@Transactional
 	public List<RegistCourseInfo> getList() {
 		
 		List<RegistCourseInfo> list = mapper.getApplyList();
@@ -65,7 +64,6 @@ public class UserService {
 		mapper.insertCourseApply(courseApply);
 	}
 	
-	@Transactional
 	public UserInfo loginCheck(UserForm userForm) {
 		UserInfo user = mapper.loginCheck(userForm);
 		return user;
@@ -77,7 +75,6 @@ public class UserService {
 	}
 	
 
-	@Transactional
 	public Boolean idCheck(UserForm userForm) {
 		Boolean result = false;
 		String id = mapper.idCheck(userForm);

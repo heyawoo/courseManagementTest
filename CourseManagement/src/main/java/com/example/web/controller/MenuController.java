@@ -49,9 +49,8 @@ public class MenuController {
 		if (result.hasErrors()) { return "/login"; }
 		
 		UserInfo user = service.loginCheck(userForm);
-		
 		// error
-		if (user.getId() == null) {
+		if (user == null) {
 			result.reject("error.user.login.no.account");
 		}
 		if (result.hasErrors()) {

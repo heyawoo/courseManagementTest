@@ -59,13 +59,13 @@
     		</if>
     		<if test="status != ''">
     			<if test="status == 'complete'">
-    				<![CDATA[ AND the_date < CURDATE() ]]>
+    				<![CDATA[ AND DATE(the_date) < CURDATE() OR DATE(the_date) = CURDATE() AND TIME(end_time) < CURTIME()]]>
     			</if>
     			<if test="status == 'ongoing'">
-    				<![CDATA[ AND the_date = CURDATE() ]]>
+    				<![CDATA[ AND the_date = CURDATE() AND TIME(start_time) <= CURTIME() AND TIME(end_time) >= CURTIME() ]]>
     			</if>
     			<if test="status == 'ready'">
-    				<![CDATA[ AND the_date > CURDATE() ]]>
+    				<![CDATA[ AND DATE(the_date) > CURDATE() OR DATE(the_date) = CURDATE() AND TIME(start_time) > CURTIME()]]>
     			</if>
     		</if>
     	</where>
